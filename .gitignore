@@ -1,0 +1,9 @@
+._*
+chef
+.swp
+.vagrant
+.idea
+.DS_Store
+*.bak
+.tmp
+*.pyc

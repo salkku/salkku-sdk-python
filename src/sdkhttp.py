@@ -149,6 +149,13 @@ class HTTPClient:
         url = '{}/portfolio/{}'.format(self.api_uri, portfolio_id)
         return self.__make_authenticated_get_request(url)
 
+    def post_portfolio(self, file_name):
+        with open(file_name, 'r', encoding='utf-8') as f:
+            portfolio = json.loads(f.read())
+
+        url = '{}/portfolio'.format(self.api_uri)
+        return self.__post_json(url, portfolio)
+
     def get_portfolio_history(self, portfolio_id):
         # type: (string, string) -> requests.Response
         if self.options['verbose']:
@@ -171,10 +178,19 @@ class HTTPClient:
             print("Getting transactions of portfolio {}...".format(portfolio_id))
 
         if api_format is not None:
-            url = '{}/portfolio/{}/transaction?format={}'.format(self.api_uri, portfolio_id, api_format)
+            url = '{}/portfolio/{}/transaction?format={}'.format(
+                self.api_uri, portfolio_id, api_format)
         else:
             url = '{}/portfolio/{}/transaction'.format(self.api_uri, portfolio_id)
         return self.__make_authenticated_get_request(url)
+
+    def post_portfolio_transactions(self, portfolio_id, file_name):
+        with open(file_name, 'r', encoding='utf-8') as f:
+            transactions = json.loads(f.read())
+
+        for t in transactions:
+            url = '{}/portfolio/{}/transaction'.format(self.api_uri, portfolio_id)
+            self.__post_json(url, t)
 
     def get_portfolio_dividends(self, portfolio_id, api_format):
         # type: (string, string) -> requests.Response
@@ -182,7 +198,16 @@ class HTTPClient:
             print("Getting dividends of portfolio {}...".format(portfolio_id))
 
         if api_format is not None:
-            url = '{}/portfolio/{}/dividend?format={}'.format(self.api_uri, portfolio_id, api_format)
+            url = '{}/portfolio/{}/dividend?format={}'.format(
+                self.api_uri, portfolio_id, api_format)
         else:
             url = '{}/portfolio/{}/dividend'.format(self.api_uri, portfolio_id)
         return self.__make_authenticated_get_request(url)
+
+    def post_portfolio_dividends(self, portfolio_id, file_name):
+        with open(file_name, 'r', encoding='utf-8') as f:
+            dividends = json.loads(f.read())
+
+        for d in dividends:
+            url = '{}/portfolio/{}/dividend'.format(self.api_uri, portfolio_id)
+            self.__post_json(url, d)

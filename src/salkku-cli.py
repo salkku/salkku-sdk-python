@@ -59,7 +59,9 @@ def main():
         elif args.id is not None:
             stdout(client.get_security(args.id))
     elif args.command == "portfolio":
-        if args.id is not None:
+        if args.data is not None:
+            stdout(client.post_portfolio(args.data))
+        elif args.id is not None:
             stdout(client.get_portfolio(args.id))
         else:
             stdout(client.get_portfolios())
@@ -77,12 +79,18 @@ def main():
         stdout(client.ping())
     elif args.command == "portfolio-transaction":
         if args.id is not None:
-            stdout(client.get_portfolio_transactions(args.id, args.format))
+            if args.data is not None:
+                client.post_portfolio_transactions(args.id, args.data)
+            else:
+                stdout(client.get_portfolio_transactions(args.id, args.format))
         else:
             raise Exception("Need portfolio id")
     elif args.command == "portfolio-dividend":
         if args.id is not None:
-            stdout(client.get_portfolio_dividends(args.id, args.format))
+            if args.data is not None:
+                client.post_portfolio_dividends(args.id, args.data)
+            else:
+                stdout(client.get_portfolio_dividends(args.id, args.format))
         else:
             raise Exception("Need portfolio id")
 

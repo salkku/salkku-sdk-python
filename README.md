@@ -50,6 +50,10 @@ python3 src/salkku-cli.py currency --user="yourusername" --password="yourpasswor
 ```
 python3 src/salkku-cli.py exchange --user="yourusername" --password="yourpassword"
 ```
+* Get list of transaction types:
+```
+python3 src/salkku-cli.py transaction-type --user="yourusername" --password="yourpassword"
+```
 * Search securities:
 ```
 python3 src/salkku-cli.py security --user="yourusername" --password="yourpassword" --name="apple"
@@ -68,7 +72,7 @@ python3 src/salkku-cli.py portfolio --user="yourusername" --password="yourpasswo
 ```
 * Post new portfolio:
 ```
-python3 src/salkku-cli.py portfolio --user="yourusername" --password="yourpassword" --id="1" --data="portfolio.json"
+python3 src/salkku-cli.py portfolio --user="yourusername" --password="yourpassword" --data="portfolio.json"
 ```
 * Get portfolio history:
 ```

@@ -118,6 +118,13 @@ class HTTPClient:
         url = '{}/exchange/{}/security'.format(self.api_uri, exchange_id)
         return self.__make_authenticated_get_request(url)
 
+    def get_transaction_types(self):
+        if self.options['verbose']:
+            print("Getting list of transaction types...")
+
+        url = '{}/transaction/type'.format(self.api_uri)
+        return self.__make_authenticated_get_request(url)
+
     def search_security(self, search):
         if self.options['verbose']:
             print("Searching security with \"{}\"...".format(search))

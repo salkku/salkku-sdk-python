@@ -53,6 +53,8 @@ def main():
             stdout(client.get_exchange_securities(args.id))
         else:
             raise Exception("Need exchange id")
+    elif args.command == "transaction-type":
+        stdout(client.get_transaction_types())
     elif args.command == "security":
         if args.name is not None:
             stdout(client.search_security(args.name))
